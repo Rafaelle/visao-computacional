@@ -1,14 +1,21 @@
 import cv2
+import time
 
 classificador = cv2.CascadeClassifier("haarcascade_frontalface_default.xml") # carregar arquivo
 camera = cv2.VideoCapture(0) # capturar imagem da webcam 
 amostra = 1 # controlar quantas fotos são tiradas na web (video)
 numeroAmostras = 10 # valor ainda será estudado
 # adicionar identificador para pessoas diferentes
+id = 2 # identificador de pessoa
+largura, altura = 220, 220 # para normalizar as imagens devido aos algoritmos de reconhecimento, o tamanho devem ser iguais
 
-print("Capturando...")
+print("Capturando faces...")
+
+start = time.time()
+
 
 while (True) :
+    now = time.time()
     conectcado, imagem = camera.read() # conectar e ler imagem da camera
     imagem = cv2.flip(imagem,180) #espelha a imagem
 
@@ -32,14 +39,22 @@ while (True) :
 
         # quando a tecla Q for pressionada, capturar imagem
         if cv2.waitKey(1) & 0xFF == ord('q'):
-            cv2.imwrite("fotos/face_" + str(amostra) + ".jpg", cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY))
-            print("Foto " + str(amostra) + " capturada")
+            imagemFace = cv2.resize(imagemCinza[y:y + a, x:x + l], (largura, altura)) # para ajustar ao tamanho que desejamos
+            cv2.imwrite("fotos/face_" + str(id) + "_" + str(amostra) + ".jpg", imagemFace)
+            print("Amostra " + str(amostra) + " capturada")
             amostra += 1
+           
 
     cv2.imshow("Face", imagem)
+    cv2.waitKey(1)
     # quando chegar no número de amostras para o programa
     if (amostra >= numeroAmostras + 1) : 
-        break     
+        break    
+
+    #if cv2.waitKey(1) & 0xFF == ord('q'):
+    #    cv2.destroyWindow("Face")
+    #    break
+ 
 
 print ("Finalizado!")
 camera.release() # liberar a memoria
