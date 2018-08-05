@@ -6,7 +6,7 @@ camera = cv2.VideoCapture(0) # capturar imagem da webcam
 amostra = 1 # controlar quantas fotos são tiradas na web (video)
 numeroAmostras = 30 # valor ainda será estudado
 # adicionar identificador para pessoas diferentes
-id = 3# identificador de pessoa
+id = 4# identificador de pessoa
 largura, altura = 220, 220 # para normalizar as imagens devido aos algoritmos de reconhecimento, o tamanho devem ser iguais
 
 print("Capturando faces...")
@@ -40,7 +40,7 @@ while (True) :
         # quando a tecla Q for pressionada, capturar imagem
         if cv2.waitKey(1) & 0xFF == ord('q'):
             imagemFace = cv2.resize(imagemCinza[y:y + a, x:x + l], (largura, altura)) # para ajustar ao tamanho que desejamos
-            cv2.imwrite("fotos/face_" + str(id) + "_" + str(amostra) + ".jpg", imagemFace)
+            cv2.imwrite("samples/face_" + str(id) + "_" + str(amostra) + ".jpg", imagemFace)
             print("Amostra " + str(amostra) + " capturada")
             amostra += 1
            

@@ -23,9 +23,9 @@ def getImagemComId():
     print(caminhos)
 '''
     #percorrendo todas as imagens
-    for caminhoImag in os.listdir('fotos'):
+    for caminhoImag in os.listdir('samples'):
         imagemFace = cv2.cvtColor(cv2.imread(
-            "fotos\\"+caminhoImag), cv2.COLOR_BGR2GRAY)
+            "samples\\"+caminhoImag), cv2.COLOR_BGR2GRAY)
         # para pegar o identificador de cada pessoa (verificar)
         id = int(os.path.split(caminhoImag)[-1].split('_')[1])
         #lista de ids
@@ -52,14 +52,14 @@ print("Treinando...")
 
 print("Treinando com eigenFace..")
 eigenface.train(faces, ids)
-eigenface.write("classificadorEigen.yml")
+eigenface.write("classifiers/classificadorEigen.yml")
 
 print("Treinando com fisherFace..")
 fisherface.train(faces, ids)
-fisherface.write("classificadorFisher.yml")
+fisherface.write("classifiers/classificadorFisher.yml")
 
 print("Treinando com LBPH..")
 lbph.train(faces, ids)
-lbph.write("classificadorLBPH.yml")
+lbph.write("classifiers/classificadorLBPH.yml")
 
 print("Treinamento realizado")
