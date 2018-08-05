@@ -1,0 +1,13 @@
+Fisherfaces (o nome se dá a umestatistico que deu origem a base de dados utilizada)
+Alguns autores consideram uma melhoria do eignface
+
+CARACTERÍSTICAS PRINCIPAIS
+    - Utiliza LDA(linear discriminant analysis), que também reduz as dimensões, assim como o PCA
+    - LDA não foca na maior variação, mas na maximização de separação entre as classes (encontrar caracteristicas mais relevantes)
+    - Extração de características separadamente (a iluminação não afeta)
+    - Fisherfaces (vetores) pode ser calculado usando PCA ou regularização
+    - Parâmetros 
+        # num_components
+        # threshold
+
+

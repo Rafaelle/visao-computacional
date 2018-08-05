@@ -1,0 +1,32 @@
+LBPH (local binary partener histogram)
+
+
+matriz de pixels  e utilizar o pixel central, se o valor dos vizinhos for maior ou igual que o pixel, vira 1 caso contrario vira 0
+bastante robusto a iluminação
+
+número binario da decodificação transforma em decimal
+Apartir da decodificação da imagem, teremos um histograma
+
+Eficiente para bordas e cantos
+
+TREINAMENTO 
+
+-> número decimal é usado para treinar o sitema, gerando um histograma de valores (histograma para cada face)
+-> encontrar a estrutura local da imagem por meio dos vizinhos
+
+CLASSIFICAÇÃO
+-> Gerar o hostograma da nova imagem e comparar com os histogramas da base de dados
+
+
+PARÂMETROS
+-> radius (alcance): 
+    # Raio maior umenta abrancgêcia, mas perde bordas finas (pontos mais distantes)
+    # maior o raio maior o padrão codificado, mas aumenta o esforço computacional 
+-> neighbors (vizinhos):
+    # números de pontos da amostra para construir um padrão local
+    # maior o número de vizinhos, maior o esforço computacional
+-> grid_x (número de celulas na horizontal):
+    # mais celular maior a dimensão do vetor de características (histogramas)
+-> grid_y (número de celulas na vertical):
+    # maior o número, mmenos pixels em cada histograma (mais esparço)
+-> threshold (limite de confiança)

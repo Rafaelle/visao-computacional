@@ -1,0 +1,72 @@
+Eigenfaces
+
+CARACTERÍSTICAS PRINICPAIS
+    - Olha para todas as imagens detodas as pessoas de uma vez e tenta encontrar componentes de todas elas combinadas
+    - não focanas características que distinguem um indivíduo do outro
+    - PCA foca na variação (por exemplo na iluminação)
+    - ILUMINAÇÂO é importante e pode descartar outras características
+
+
+
+comparação da foto original com as fotos fantasmas que possuem a extração das principais caracteristicas da pessoa (pontos mais claros)
+e com base nessas caracteristicas, faz-se uma combinação linear e vai somar com a imagem média
+ou seja
+pegar todas as imagens de treinamento e gera um imagem média
+e vai recosntruir a pessoa por meio das imagens com caracteristicas
+
+###estudar melhor###
+eigenVector -> vetor próprio
+uma imagem é uma matriz de pixels com valores RGB, multiplicação de vetors
+Exemplo:
+valores RGB 
+|1  2  0|   |1|   |3|      |1|
+|2  1  0| x |1| = |3| => 3 |1| => Altera a escala da imagem, utilizado na transformação entre imagem
+|0  0 -3|   |0|   |0|    | |0|
+             |           V
+             V       Eigen value (um valor escalar)
+        Eigen vector (vetor que quepode sermultiplicado por um número escalar e gerar a "saída")
+
+
+ALGORITMO
+1º base de dados de imagens
+    - imagem de uma pessoa com tamanho predefinido
+2º para cada face do treinamento, deve-se construir um vetor com cada pixel em uma linha, cada linha tem um valor de pixel correspondente a imagem
+3º cada coluna é uma face
+    - para o treinamento pode ficar pesado, então, aplicamos o conceito de PCA (Principal Component Analysis)
+    Tecnica de machine learn para trabalhar com a redução da dimensão dos dados, ou seleção dos atributos
+    para saber quais desses atributos são utilizados para acertar mais o reconhecimento
+    OU SEJA, Remover informação inútil e reduzir a dimensão
+4º Após reduzir a dimensão, pega a face média, captura apenas os traços principais
+    Mostra o desvio padrão
+
+TREINAMENTO 
+
+-> imagem possui muitos pixels, por isso usar o PCA
+-> conjunto de imagens pode mapear um rupo de pontos neste grande espaço
+-> As fases são decompostas numa série de Componentes principais
+-> posição de pontos principais (olhos, boca, nariz) não é aleatorio
+-> cada face pode ser representada pela combinação linear de várias Eigenfaces (faces fantasmas)
+-> a variação entre as faces ajuda a diferenciar
+-> CONSIDERA A ILUMINAÇÂO COMO UMA CARACTERÍSTICA IMPORTANTE
+-> Encontrar vetores que representam melhor a distribuição das faces
+-> eigenVector projeta as imagens de faces noespaço de faces (conjunto de faces)
+
+CLASSIFICAÇÃO
+-> projeta a imagem de teste no espaço de faces
+-> extrai componentes  Eigenfaces da imagem 
+-> calcula a distância entre a nova face e as faces de treinamento (knn)
+    -> busca nas imagens de treinamento pela mais semelhante 
+
+
+PARÂMETROS
+-> num_components: PCA, quantos eigenfaces (caracteristicas principais) deve existir na base de dados
+-> Threshold: 
+    # limite de confiança (distância de uma face para outra)
+    # se o threshold for maior que o especificado é considerado uma face desconhecida
+    # margem de erro
+
+
+
+ 
+
+
