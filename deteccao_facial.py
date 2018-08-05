@@ -1,18 +1,24 @@
 import cv2
 import time
 
+def AddName():
+    Name = input('Digite seu nome ')
+    Info = open("Names.txt", "r+")
+    ID = ((sum(1 for line in Info))+1)
+    Info.write(str(ID) + "," + Name + "\n")
+    print ("Nome armazenado como ID: " + str(ID))
+    Info.close()
+    return ID
+
 classificador = cv2.CascadeClassifier("haarcascade_frontalface_default.xml") # carregar arquivo
 camera = cv2.VideoCapture(0) # capturar imagem da webcam 
 amostra = 1 # controlar quantas fotos são tiradas na web (video)
 numeroAmostras = 30 # valor ainda será estudado
 # adicionar identificador para pessoas diferentes
-id = 4# identificador de pessoa
+id = AddName()
 largura, altura = 220, 220 # para normalizar as imagens devido aos algoritmos de reconhecimento, o tamanho devem ser iguais
 
 print("Capturando faces...")
-
-start = time.time()
-
 
 while (True) :
     now = time.time()
@@ -22,9 +28,7 @@ while (True) :
     imagemCinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY) # tranformando imagem vinda na web em tons de cinza 
 
     # detectar face em imagem cinza aumenta o desempenho
-    facesDetectadas = classificador.detectMultiScale(imagemCinza, 
-    scaleFactor=1.5,
-    minSize = (100,100))
+    facesDetectadas = classificador.detectMultiScale(imagemCinza, 1.3, 5)
 
     ''' 
         facesDetectadas é uma matriz com posição (x,y), largura e altura das faces detectadas

@@ -27,7 +27,7 @@ def getImagemComId():
         imagemFace = cv2.cvtColor(cv2.imread(
             "samples\\"+caminhoImag), cv2.COLOR_BGR2GRAY)
         # para pegar o identificador de cada pessoa (verificar)
-        id = int(os.path.split(caminhoImag)[-1].split('.')[1])
+        id = int(os.path.split(caminhoImag)[-1].split('_')[1])
         #lista de ids
         ids.append(id)
         #lista de rostos
