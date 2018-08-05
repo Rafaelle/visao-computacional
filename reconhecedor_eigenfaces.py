@@ -7,7 +7,7 @@ def redim(img, largura):  # função para redimensionar uma imagem
 
 detectorFace = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 reconhecedor = cv2.face.EigenFaceRecognizer_create()
-reconhecedor.read("classificadorEigen.yml")
+reconhecedor.read("classifiers/classificadorEigen.yml")
 largura, altura = 220, 220
 font = cv2.FONT_HERSHEY_SIMPLEX
 camera = cv2.VideoCapture(0)  # id do dispositivo (camera principal do notebook)
@@ -21,13 +21,13 @@ pessoas = {
 
 while (True):
     conectado, imagem = camera.read()
-    imagem = redim(imagem, 480)
+    imagem = redim(imagem, 640)
     imagemCinza = cv2.cvtColor(imagem, cv2.COLOR_RGB2GRAY)
 
     # detectar face em imagem cinza aumenta o desempenho
     facesDetectadas = detectorFace.detectMultiScale(imagemCinza,
-                                                    scaleFactor=1.5,
-                                                    minSize=(100, 100))
+                                                    scaleFactor=1.1,
+                                                    minSize=(30, 30))
 
     frame_temp = imagem.copy()
 
@@ -39,7 +39,7 @@ while (True):
         # desenhar o retangulo na imagem no ponto inicial (x,y) até o ponto final (x+l, y+a)
         id, confianca = reconhecedor.predict(imagemFace)
         # id = o nomedo objeto que conseguiu identificar
-        cv2.putText(frame_temp, pessoas[id], (x, y + (a + 30)), font, 3, (0, 0, 255))
+        cv2.putText(frame_temp, pessoas[id], (x, y + (a + 30)), font, 2, (0, 0, 255))
         cv2.putText(frame_temp, str(confianca), (x, y + (a + 50)), font, 1, (0, 0, 255))
 
     cv2.imshow("Face", redim(frame_temp, 640))

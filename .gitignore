@@ -121,5 +121,8 @@ fabric.properties
 
 # Sonarlint plugin
 
+/samples/*.jpg
+
+/classifiers/*.yml
 
 # End of https://www.gitignore.io/api/pycharm,intellij
