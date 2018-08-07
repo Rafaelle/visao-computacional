@@ -64,6 +64,8 @@ print ("Iniciando reconhecimento...")
 while (True):
     conectado, imagem = camera.read()
     imagem = redim(imagem, 640)
+    imagem = cv2.flip(imagem,180) #espelha a imagem
+
     imagemCinza = cv2.cvtColor(imagem, cv2.COLOR_RGB2GRAY)
 
     # detectar face em imagem cinza aumenta o desempenho
