@@ -4,24 +4,16 @@ import numpy as np
 
 #criar os classificadores
 eigenface = cv2.face.EigenFaceRecognizer_create()
-fisherface = cv2.face.FisherFaceRecognizer_create()
-lbph = cv2.face.LBPHFaceRecognizer_create()
+fisherface = cv2.face.FisherFaceRecognizer_create(3, 5000)
+lbph = cv2.face.LBPHFaceRecognizer_create(2, 2, 7, 7, 50)
 
 # para percorrer as imagens salvas na captura (baseado no ID)
-
-
 def getImagemComId():
     #lista com todas as fotos da pessoa
     #caminhos = []
     ids = []
     faces = []
 
-    #tirar
-    '''for f in os.listdir('fotos'):
-        caminhos.append('fotos\\' + f)
-        #print(f)
-    print(caminhos)
-'''
     #percorrendo todas as imagens
     for caminhoImag in os.listdir('samples'):
         imagemFace = cv2.cvtColor(cv2.imread(
@@ -32,14 +24,9 @@ def getImagemComId():
         ids.append(id)
         #lista de rostos
         faces.append(imagemFace)
-        #cv2.imshow("Face", imagemFace)
-        #cv2.waitKey(10)
-    #necessário para fazer o treinamento (ver depois)
-    return np.array(ids), faces
-    '''
-    fotos = pasta
-  '''
 
+    #necessário para fazer o treinamento
+    return np.array(ids), faces
 
 #matriz imagem e id
 ids, faces = getImagemComId()
@@ -49,7 +36,6 @@ print("Treinando...")
 #treinamento supervisionado -> passa as faces (entradas) e os ID's (saídas esperadas)
 #ter pelo menos duas pessoas
 #gravar na pasta a classificação dos registros
-
 print("Treinando com eigenFace..")
 eigenface.train(faces, ids)
 eigenface.write("classifiers/classificadorEigen.yml")

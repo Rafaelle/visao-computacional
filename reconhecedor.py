@@ -1,6 +1,5 @@
 import cv2
 
-
 def FileRead():
     Info = open("Names.txt", "r")  # Abre o arquivo de texto com os nomes
     NAME = []
@@ -14,7 +13,6 @@ def FileRead():
 
 Names = FileRead()  # Executa a função para pegar os IDs e os nomes dos usuários
 
-
 def ID2Name(ID):
     if ID > 0:
         NameString = Names[ID-1] # Busca o nome usando o indice do ID
@@ -22,7 +20,6 @@ def ID2Name(ID):
         NameString = " Face não reconhecida "
 
     return NameString
-
 
 def redim(img, largura):  # função para redimensionar uma imagem
     alt = int(img.shape[0] / img.shape[1] * largura)
@@ -38,13 +35,13 @@ detectorFace = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
 # reconhecedores
 reconhecedor_eigen = cv2.face.EigenFaceRecognizer_create()
-reconhecedor_eigen.read("classificadorEigen.yml")
+reconhecedor_eigen.read("classifiers/classificadorEigen.yml")
 
 reconhecedor_fisher = cv2.face.FisherFaceRecognizer_create()
-reconhecedor_fisher.read("classificadorFisher.yml")
+reconhecedor_fisher.read("classifiers/classificadorFisher.yml")
 
 reconhecedor_lbph = cv2.face.LBPHFaceRecognizer_create()
-reconhecedor_lbph.read("classificadorLBPH.yml")
+reconhecedor_lbph.read("classifiers/classificadorLBPH.yml")
 
 def reconhecedor(imageFace, reconhecedor, frame, x, y, l, a ): # função para montar frame de um reconhecedor
     cv2.rectangle(frame, (x, y), (x + l, y + a), (0, 0, 255), 2)
@@ -77,14 +74,6 @@ while (True):
 
     frame_temp_lbph = imagem.copy()
 
-
-    ''' 
-        facesDetectadas é uma matriz com posição (x,y), largura e altura das faces detectadas
-        l = largura
-        a = altura
-        x,y = posição de inicio da face
-    '''
-
     for (x, y, l, a) in facesDetectadas:
         imagemFace = cv2.resize(imagemCinza[y:y + a, x:x + l],
                                 (largura, altura))  # para ajustar ao tamanho que desejamos
@@ -106,8 +95,6 @@ while (True):
     if cv2.waitKey(1) == ord("q"):
         print("Finalizando reconhecimento...") 
         break
-
-
 
 camera.release()
 cv2.destroyAllWindows()

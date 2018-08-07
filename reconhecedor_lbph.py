@@ -28,7 +28,7 @@ def redim(img, largura):  # função para redimensionar uma imagem
     return img
 
 detectorFace = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-reconhecedor = cv2.face.LBPHFaceRecognizer_create()
+reconhecedor = cv2.face.LBPHFaceRecognizer_create(2, 2, 7, 7, 50)
 reconhecedor.read("classifiers/classificadorLBPH.yml")
 largura, altura = 220, 220
 font = cv2.FONT_HERSHEY_SIMPLEX

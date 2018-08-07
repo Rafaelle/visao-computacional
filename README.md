@@ -1,6 +1,12 @@
 # Visão computacional
 Projeto final da disciplina de Visão Computacional - UFCG 2018.1 
 
+#Equipe:
+
+    Luiza Silveira 
+    Mendelssohn Dantas de Sá 
+    Rafaelle Amorim Monteiro Xavier
+     
 ## Projeto
     Reconhecimento facial, em linguagem python e a biblioteca de código aberto OpenCV
 
