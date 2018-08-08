@@ -15,12 +15,16 @@ def creatingDirectories():
     current_directory = os.getcwd()
     samplesDir = current_directory + '\samples'
     classifiersDir = current_directory + '\classifiers'
+    classifiersYaleDir =  current_directory + '\classifiers\classifiersYale'
 
     if not os.path.isdir(samplesDir):
         os.makedirs(samplesDir)
 
     if not os.path.isdir(classifiersDir):
         os.makedirs(classifiersDir)
+
+    if not os.path.isdir(classifiersYaleDir):
+        os.makedirs(classifiersYaleDir)
 
 classificador = cv2.CascadeClassifier("haarcascade_frontalface_default.xml") # carregar arquivo
 camera = cv2.VideoCapture(0) # capturar imagem da webcam 
